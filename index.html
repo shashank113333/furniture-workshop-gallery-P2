@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Workshop Gallery for Handcrafted Furniture Management">
+  <title>Handcrafted Furniture Workshop Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Keyboard Accessibility Skip Link -->
+  <a href="#gallery-section" class="skip-nav-link">Skip to Gallery Content</a>
+
+  <!-- Top Banner / Header -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="header-title-box">
+        <h1 class="main-heading">Workshop Gallery</h1>
+        <p class="sub-heading">Handcrafted Furniture &bull; Internal Floor Staff System</p>
+      </div>
+      <div class="header-status" aria-label="System status">
+        <span class="status-indicator"></span>
+        <span id="network-status-text">Network: Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Area -->
+  <main id="main-content" class="app-container" role="main">
+    
+    <!-- Controls Section: Search & Filters -->
+    <section class="controls-card" aria-label="Search and Filter Controls">
+      <div class="control-row">
+        <div class="control-item search-box">
+          <label for="search-input" class="label-text">Search Inventory</label>
+          <input 
+            type="search" 
+            id="search-input" 
+            class="input-control" 
+            placeholder="Search by name, wood type, or joinery..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="control-item">
+          <label for="wood-filter" class="label-text">Wood Species</label>
+          <select id="wood-filter" class="select-control">
+            <option value="ALL">All Species</option>
+            <option value="Teak">Teak</option>
+            <option value="Walnut">Walnut</option>
+            <option value="Oak">Oak</option>
+            <option value="Ash">Ash</option>
+          </select>
+        </div>
+
+        <div class="control-item">
+          <label for="status-filter" class="label-text">Availability</label>
+          <select id="status-filter" class="select-control">
+            <option value="ALL">All Statuses</option>
+            <option value="Available">Available</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Reserved">Reserved</option>
+          </select>
+        </div>
+
+        <div class="control-item network-toggle-item">
+          <label for="slow-3g-toggle" class="checkbox-label">
+            <input type="checkbox" id="slow-3g-toggle" class="checkbox-control">
+            <span>Simulate Slow 3G</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Async Loading Progress (For Poor Connectivity) -->
+    <div id="loading-spinner" class="loading-state" role="status" aria-live="polite" hidden>
+      <div class="spinner-circle" aria-hidden="true"></div>
+      <p>Synchronizing workshop records...</p>
+    </div>
+
+    <!-- Gallery Catalog Landmark -->
+    <section id="gallery-section" class="catalog-section" aria-label="Furniture Catalog List">
+      <div class="catalog-header">
+        <h2 class="section-title">Current Workshop Pieces</h2>
+        <span id="results-count" class="count-badge">8 items</span>
+      </div>
+
+      <!-- Cards Grid -->
+      <div id="cards-grid" class="cards-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Empty State View (Unhappy Path Requirement) -->
+      <div id="empty-state-view" class="empty-state-box" role="status" aria-live="polite" hidden>
+        <h3 class="empty-title">No data found</h3>
+        <p class="empty-msg">No handcrafted pieces match your search or filter criteria.</p>
+        <button type="button" id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
+      </div>
+    </section>
+
+    <!-- Intake Form: Add New Handcrafted Piece -->
+    <section class="intake-section" aria-label="Add New Furniture Piece">
+      <div class="form-container">
+        <h2 class="form-title">Log New Workshop Piece</h2>
+        <p class="form-subtext">Fields marked with an asterisk (<span class="required">*</span>) are mandatory.</p>
+        
+        <form id="furniture-form" novalidate>
+          <div class="form-grid">
+            
+            <div class="form-group">
+              <label for="item-title" class="label-text">Piece Title <span class="required">*</span></label>
+              <input type="text" id="item-title" name="title" class="input-control" placeholder="e.g. Dining Table No. 4" required>
+              <span id="title-error" class="error-text" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="item-wood" class="label-text">Wood Species <span class="required">*</span></label>
+              <select id="item-wood" name="wood" class="select-control" required>
+                <option value="">Select Species...</option>
+                <option value="Teak">Teak</option>
+                <option value="Walnut">Walnut</option>
+                <option value="Oak">Oak</option>
+                <option value="Ash">Ash</option>
+              </select>
+              <span id="wood-error" class="error-text" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="item-price" class="label-text">Price (USD) <span class="required">*</span></label>
+              <input type="number" id="item-price" name="price" class="input-control" placeholder="e.g. 1850" min="1" required>
+              <span id="price-error" class="error-text" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="item-joinery" class="label-text">Joinery Method <span class="required">*</span></label>
+              <input type="text" id="item-joinery" name="joinery" class="input-control" placeholder="e.g. Mortise and Tenon" required>
+              <span id="joinery-error" class="error-text" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="item-status" class="label-text">Floor Status <span class="required">*</span></label>
+              <select id="item-status" name="status" class="select-control" required>
+                <option value="Available">Available</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Reserved">Reserved</option>
+              </select>
+              <span id="status-error" class="error-text" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="item-dimensions" class="label-text">Dimensions <span class="required">*</span></label>
+              <input type="text" id="item-dimensions" name="dimensions" class="input-control" placeholder="e.g. 72L x 36W x 30H" required>
+              <span id="dimensions-error" class="error-text" aria-live="polite"></span>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="submit-btn" class="btn btn-primary">Save to Gallery</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Accessible Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p>&copy; Handcrafted Furniture Workshop Gallery &bull; Ticket ENG-15994</p>
+      <p class="tech-note">Pure Semantic HTML5 &bull; Vanilla CSS &bull; Monochromatic Corporate Layout</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

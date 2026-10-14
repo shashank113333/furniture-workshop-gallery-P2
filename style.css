@@ -1,0 +1,466 @@
+/* ==========================================================================
+   Handcrafted Furniture Workshop Gallery - Corporate Design System
+   Ticket ID: ENG-15994 | Monochromatic System (16px/32px spacing scale)
+   ========================================================================== */
+
+/* 1. Design Tokens & Spacing Scale */
+:root {
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+
+  /* Monochromatic Color Palette */
+  --bg-main: #f8f9fa;
+  --bg-card: #ffffff;
+  --text-dark: #111827;      /* High contrast for a11y (> 10:1) */
+  --text-muted: #4b5563;     /* Accessible gray (> 4.5:1) */
+  --border-light: #e5e7eb;
+  --border-strong: #374151;
+  --btn-primary: #111827;
+  --btn-hover: #1f2937;
+
+  /* Strict Error State (Only functional color allowed) */
+  --error-color: #b71c1c;
+  --error-bg: #fff5f5;
+  --error-border: #dc2626;
+
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --border-radius: 4px;
+}
+
+/* 2. Reset & Accessibility Baseline */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-stack);
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keyboard Navigation Skip Link */
+.skip-nav-link {
+  position: absolute;
+  top: -50px;
+  left: var(--space-16);
+  background: var(--text-dark);
+  color: #ffffff;
+  padding: var(--space-8) var(--space-16);
+  z-index: 100;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+}
+
+.skip-nav-link:focus {
+  top: var(--space-16);
+  outline: 3px solid var(--text-dark);
+}
+
+/* Accessible Focus States (Lighthouse Requirement) */
+:focus-visible {
+  outline: 2px solid var(--text-dark);
+  outline-offset: 2px;
+}
+
+/* 3. Site Header */
+.site-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-light);
+  padding: var(--space-16) var(--space-32);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+.main-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sub-heading {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.header-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  background: var(--bg-main);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--text-dark);
+  border-radius: 50%;
+}
+
+/* 4. App Container & Layout */
+.app-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-32) var(--space-16);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+/* 5. Controls Panel (Search & Filters) */
+.controls-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  padding: var(--space-24);
+}
+
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+  align-items: flex-end;
+}
+
+.control-item {
+  flex: 1;
+  min-width: 180px;
+}
+
+.control-item.search-box {
+  flex: 2;
+  min-width: 260px;
+}
+
+.label-text {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-8);
+}
+
+.input-control,
+.select-control {
+  width: 100%;
+  padding: 10px var(--space-16);
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--border-radius);
+}
+
+.network-toggle-item {
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-control {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--text-dark);
+}
+
+/* 6. Buttons System */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px var(--space-24);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--btn-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-hover);
+}
+
+.btn-secondary {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-main);
+}
+
+/* 7. Catalog Section & Furniture Cards Grid */
+.catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.count-badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 4px var(--space-8);
+  background-color: var(--border-light);
+  border-radius: var(--border-radius);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-24);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  padding: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-8);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.card-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--border-radius);
+}
+
+.card-specs {
+  list-style: none;
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.card-spec-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 4px;
+}
+
+.spec-title {
+  color: var(--text-muted);
+}
+
+.spec-value {
+  font-weight: 600;
+}
+
+.card-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* 8. Unhappy Path: Empty State (No Data Found) */
+.empty-state-box {
+  background-color: var(--bg-card);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--border-radius);
+  padding: var(--space-48) var(--space-16);
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-8);
+}
+
+.empty-msg {
+  color: var(--text-muted);
+  margin-bottom: var(--space-24);
+}
+
+/* 9. Unhappy Path: Slow 3G Loading Spinner */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+  padding: var(--space-32);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+}
+
+.spinner-circle {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border-light);
+  border-top-color: var(--text-dark);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 10. Form & Validation Error States (Unhappy Path: Invalid Inputs) */
+.intake-section {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  padding: var(--space-32);
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-8);
+}
+
+.form-subtext {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-24);
+}
+
+.required {
+  color: var(--error-color);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-24);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-actions {
+  margin-top: var(--space-32);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* TRD Requirement: Offending fields highlighted in RED */
+.input-error {
+  border-color: var(--error-border) !important;
+  background-color: var(--error-bg) !important;
+  box-shadow: 0 0 0 1px var(--error-border);
+}
+
+.error-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--error-color);
+  margin-top: 4px;
+  min-height: 18px;
+}
+
+/* 11. Footer */
+.site-footer {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-light);
+  padding: var(--space-24) var(--space-16);
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .site-header {
+    padding: var(--space-16);
+  }
+  .app-container {
+    padding: var(--space-16);
+  }
+  .control-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-actions {
+    justify-content: stretch;
+  }
+  .form-actions .btn {
+    width: 100%;
+  }
+}

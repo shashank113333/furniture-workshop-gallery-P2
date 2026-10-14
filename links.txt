@@ -1,0 +1,9 @@
+Handcrafted Furniture Workshop Gallery - Deliverable Links
+Ticket: ENG-15994
+Assignee: Shashank Vishwakarma [PDIT-FTE-11454]
+
+GitHub Repository URL:
+https://github.com/YOUR_USERNAME/furniture-workshop-gallery
+
+Live Deployment Link (Vercel):
+https://furniture-workshop-gallery.vercel.app
