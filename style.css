@@ -485,8 +485,10 @@ body {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: var(--space-32);
 }
 
@@ -500,7 +502,7 @@ body {
 .footer-about {
   font-size: 0.8125rem;
   line-height: 1.6;
-  max-width: 440px;
+  max-width: 480px;
 }
 
 .footer-title {
@@ -526,13 +528,6 @@ body {
   text-align: center;
   font-size: 0.75rem;
   color: #64748b;
-}
-
-@media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-24);
-  }
 }
 
 @media (max-width: 600px) {
