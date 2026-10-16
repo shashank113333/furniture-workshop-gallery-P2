@@ -3,7 +3,6 @@ Ticket: ENG-15994
 Assignee: Shashank Vishwakarma [PDIT-FTE-11454]
 
 GitHub Repository URL:
-https://github.com/YOUR_USERNAME/furniture-workshop-gallery
-
+https://github.com/shashank113333/furniture-workshop-gallery-P2
 Live Deployment Link (Vercel):
-https://furniture-workshop-gallery.vercel.app
+https://furniture-workshop-gallery.vercel.app/
