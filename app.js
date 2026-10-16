@@ -76,7 +76,7 @@
       joinery: "Sliding Housing",
       status: "In Progress",
       dimensions: "42W x 14D x 70H",
-      image: "https://images.unsplash.com/photo-1594643444400-333036a4eb92?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=600&q=80"
     }
   ];
 
@@ -136,13 +136,12 @@
         const safeStatus = sanitizeText(item.status);
         const safeDims = sanitizeText(item.dimensions);
         const formattedPrice = Number(item.price).toLocaleString("en-US");
-        const fallbackImg = "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
-        const itemImg = item.image || fallbackImg;
+        const itemImg = item.image || "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
 
         return `
         <article class="card">
           <div class="card-img-container">
-            <img src="${itemImg}" alt="${safeTitle} handcrafted in ${safeWood}" class="card-img" loading="lazy">
+            <img src="${itemImg}" alt="${safeTitle} in ${safeWood}" class="card-img" loading="lazy">
             <span class="card-badge">${safeStatus}</span>
           </div>
 
@@ -315,6 +314,10 @@
       return;
     }
 
+    const imageEl = document.getElementById("item-image");
+    const customImage = imageEl && imageEl.value.trim() ? sanitizeText(imageEl.value.trim()) : "";
+    const defaultImage = "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
+
     const newItem = {
       id: `FW-${Date.now()}`,
       title: sanitizeText(titleEl.value.trim()),
@@ -323,7 +326,7 @@
       joinery: sanitizeText(joineryEl.value.trim()),
       status: sanitizeText(statusEl.value),
       dimensions: sanitizeText(dimsEl.value.trim()),
-      image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80"
+      image: customImage || defaultImage
     };
 
     catalog.unshift(newItem);

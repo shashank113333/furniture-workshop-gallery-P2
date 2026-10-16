@@ -8,10 +8,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Keyboard Accessibility Skip Link -->
   <a href="#gallery-section" class="skip-nav-link">Skip to Gallery Content</a>
 
-  <!-- Top Banner / Header -->
   <header class="site-header" role="banner">
     <div class="header-inner">
       <div class="header-title-box">
@@ -25,10 +23,8 @@
     </div>
   </header>
 
-  <!-- Main Application Area -->
   <main id="main-content" class="app-container" role="main">
     
-    <!-- Controls Section: Search & Filters -->
     <section class="controls-card" aria-label="Search and Filter Controls">
       <div class="control-row">
         <div class="control-item search-box">
@@ -72,25 +68,20 @@
       </div>
     </section>
 
-    <!-- Async Loading Progress (For Poor Connectivity) -->
     <div id="loading-spinner" class="loading-state" role="status" aria-live="polite" hidden>
       <div class="spinner-circle" aria-hidden="true"></div>
       <p>Synchronizing workshop records...</p>
     </div>
 
-    <!-- Gallery Catalog Landmark -->
     <section id="gallery-section" class="catalog-section" aria-label="Furniture Catalog List">
       <div class="catalog-header">
         <h2 class="section-title">Current Workshop Pieces</h2>
         <span id="results-count" class="count-badge">8 items</span>
       </div>
 
-      <!-- Cards Grid -->
       <div id="cards-grid" class="cards-grid">
-        <!-- Injected via JavaScript -->
       </div>
 
-      <!-- Empty State View (Unhappy Path Requirement) -->
       <div id="empty-state-view" class="empty-state-box" role="status" aria-live="polite" hidden>
         <h3 class="empty-title">No data found</h3>
         <p class="empty-msg">No handcrafted pieces match your search or filter criteria.</p>
@@ -98,7 +89,6 @@
       </div>
     </section>
 
-    <!-- Intake Form: Add New Handcrafted Piece -->
     <section class="intake-section" aria-label="Add New Furniture Piece">
       <div class="form-container">
         <h2 class="form-title">Log New Workshop Piece</h2>
@@ -153,6 +143,12 @@
               <span id="dimensions-error" class="error-text" aria-live="polite"></span>
             </div>
 
+            <div class="form-group">
+              <label for="item-image" class="label-text">Photo Image URL (Optional)</label>
+              <input type="url" id="item-image" name="image" class="input-control" placeholder="https://images.unsplash.com/...">
+              <span id="image-error" class="error-text" aria-live="polite"></span>
+            </div>
+
           </div>
 
           <div class="form-actions">
@@ -164,7 +160,6 @@
 
   </main>
 
-  <!-- Accessible Footer -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <p>&copy; Handcrafted Furniture Workshop Gallery &bull; Ticket ENG-15994</p>
