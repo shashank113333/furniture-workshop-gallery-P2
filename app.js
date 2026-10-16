@@ -1,8 +1,9 @@
 "use strict";
 
 (function () {
-  function logTelemetry(action) {
-    console.log(`[Analytics] User interacted with Handcrafted Furniture Workshop Gallery - ${action}`);
+  function logTelemetry(action, detail) {
+    const detailText = detail ? ` - ${detail}` : "";
+    console.log(`[Analytics] User interacted with Handcrafted Furniture Workshop Gallery - ${action}${detailText}`);
   }
 
   function sanitizeText(str) {
@@ -96,6 +97,8 @@
   let delayTimer = null;
 
   function renderCatalog() {
+    loadingSpinner.hidden = true;
+
     const query = searchInput.value.toLowerCase().trim();
     const wood = woodFilter.value;
     const status = statusFilter.value;
@@ -174,7 +177,7 @@
       .join("");
   }
 
-  function applyFilters(actionName) {
+  function applyFilters(actionName, detail) {
     if (slow3gToggle.checked) {
       loadingSpinner.hidden = false;
       cardsGrid.hidden = true;
@@ -183,36 +186,35 @@
       if (delayTimer) clearTimeout(delayTimer);
 
       delayTimer = setTimeout(function () {
-        loadingSpinner.hidden = true;
         renderCatalog();
-        logTelemetry(actionName);
-      }, 600);
+        logTelemetry(actionName, detail);
+      }, 500);
     } else {
-      loadingSpinner.hidden = true;
       renderCatalog();
-      logTelemetry(actionName);
+      logTelemetry(actionName, detail);
     }
   }
 
   searchInput.addEventListener("input", function () {
-    applyFilters("Search Query Executed");
+    const query = searchInput.value.trim();
+    applyFilters("Search Query Executed", query ? `Search: "${query}"` : "Search Cleared");
   });
 
   woodFilter.addEventListener("change", function () {
-    applyFilters(`Wood Filter Changed to ${woodFilter.value}`);
+    applyFilters("Filter Changed", `Wood: ${woodFilter.value}`);
   });
 
   statusFilter.addEventListener("change", function () {
-    applyFilters(`Status Filter Changed to ${statusFilter.value}`);
+    applyFilters("Filter Changed", `Status: ${statusFilter.value}`);
   });
 
   slow3gToggle.addEventListener("change", function () {
     if (slow3gToggle.checked) {
       networkStatusText.textContent = "Network: Slow 3G (Simulated)";
-      logTelemetry("Slow 3G Simulation Enabled");
+      logTelemetry("Slow 3G Latency Simulation Enabled");
     } else {
       networkStatusText.textContent = "Network: Online";
-      logTelemetry("Slow 3G Simulation Disabled");
+      logTelemetry("Slow 3G Latency Simulation Disabled");
     }
   });
 
@@ -326,7 +328,7 @@
 
     catalog.unshift(newItem);
     furnitureForm.reset();
-    applyFilters("New Workshop Piece Added Successfully");
+    applyFilters("New Workshop Piece Added Successfully", newItem.title);
   });
 
   renderCatalog();
