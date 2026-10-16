@@ -24,7 +24,8 @@
       price: 2400,
       joinery: "Mortise and Tenon",
       status: "Available",
-      dimensions: "84L x 38W x 30H"
+      dimensions: "84L x 38W x 30H",
+      image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: "FW-2",
@@ -33,7 +34,8 @@
       price: 1350,
       joinery: "Bridle Joinery",
       status: "Available",
-      dimensions: "30W x 32D x 28H"
+      dimensions: "30W x 32D x 28H",
+      image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: "FW-3",
@@ -42,7 +44,8 @@
       price: 3100,
       joinery: "Half-Blind Dovetails",
       status: "In Progress",
-      dimensions: "72L x 20D x 32H"
+      dimensions: "72L x 20D x 32H",
+      image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: "FW-4",
@@ -51,7 +54,8 @@
       price: 1950,
       joinery: "Through-Tenon Splines",
       status: "Available",
-      dimensions: "60W x 28D x 30H"
+      dimensions: "60W x 28D x 30H",
+      image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: "FW-5",
@@ -60,16 +64,18 @@
       price: 980,
       joinery: "Butterfly Key Inlays",
       status: "Reserved",
-      dimensions: "54L x 16D x 18H"
+      dimensions: "54L x 16D x 18H",
+      image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: "FW-6",
       title: "Scandinavian Oak Bookshelf",
       wood: "Oak",
       price: 1750,
-      joinery: "Sliding Sliding Housing",
+      joinery: "Sliding Housing",
       status: "In Progress",
-      dimensions: "42W x 14D x 70H"
+      dimensions: "42W x 14D x 70H",
+      image: "https://images.unsplash.com/photo-1594643444400-333036a4eb92?auto=format&fit=crop&w=600&q=80"
     }
   ];
 
@@ -127,30 +133,41 @@
         const safeStatus = sanitizeText(item.status);
         const safeDims = sanitizeText(item.dimensions);
         const formattedPrice = Number(item.price).toLocaleString("en-US");
+        const fallbackImg = "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
+        const itemImg = item.image || fallbackImg;
 
         return `
         <article class="card">
-          <div class="card-top">
-            <h3 class="card-title">${safeTitle}</h3>
+          <div class="card-img-container">
+            <img src="${itemImg}" alt="${safeTitle} handcrafted in ${safeWood}" class="card-img" loading="lazy">
             <span class="card-badge">${safeStatus}</span>
           </div>
 
-          <ul class="card-specs">
-            <li class="card-spec-row">
-              <span class="spec-title">Timber:</span>
-              <span class="spec-value">${safeWood}</span>
-            </li>
-            <li class="card-spec-row">
-              <span class="spec-title">Joinery:</span>
-              <span class="spec-value">${safeJoinery}</span>
-            </li>
-            <li class="card-spec-row">
-              <span class="spec-title">Dimensions:</span>
-              <span class="spec-value">${safeDims}</span>
-            </li>
-          </ul>
+          <div class="card-body">
+            <h3 class="card-title">${safeTitle}</h3>
 
-          <div class="card-price">$${formattedPrice} USD</div>
+            <ul class="card-specs">
+              <li class="card-spec-row">
+                <span class="spec-title">Timber:</span>
+                <span class="spec-value">${safeWood}</span>
+              </li>
+              <li class="card-spec-row">
+                <span class="spec-title">Joinery:</span>
+                <span class="spec-value">${safeJoinery}</span>
+              </li>
+              <li class="card-spec-row">
+                <span class="spec-title">Dimensions:</span>
+                <span class="spec-value">${safeDims}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <div>
+              <span class="card-price-label">Price</span>
+              <span class="card-price">$${formattedPrice}</span>
+            </div>
+          </div>
         </article>
       `;
       })
@@ -303,7 +320,8 @@
       price: numPrice,
       joinery: sanitizeText(joineryEl.value.trim()),
       status: sanitizeText(statusEl.value),
-      dimensions: sanitizeText(dimsEl.value.trim())
+      dimensions: sanitizeText(dimsEl.value.trim()),
+      image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80"
     };
 
     catalog.unshift(newItem);

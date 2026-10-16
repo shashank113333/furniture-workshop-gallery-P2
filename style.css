@@ -1,9 +1,3 @@
-/* ==========================================================================
-   Handcrafted Furniture Workshop Gallery - Corporate Design System
-   Ticket ID: ENG-15994 | Monochromatic System (16px/32px spacing scale)
-   ========================================================================== */
-
-/* 1. Design Tokens & Spacing Scale */
 :root {
   --space-8: 8px;
   --space-16: 16px;
@@ -11,26 +5,25 @@
   --space-32: 32px;
   --space-48: 48px;
 
-  /* Monochromatic Color Palette */
-  --bg-main: #f8f9fa;
+  --bg-main: #f8fafc;
   --bg-card: #ffffff;
-  --text-dark: #111827;      /* High contrast for a11y (> 10:1) */
-  --text-muted: #4b5563;     /* Accessible gray (> 4.5:1) */
-  --border-light: #e5e7eb;
-  --border-strong: #374151;
-  --btn-primary: #111827;
-  --btn-hover: #1f2937;
+  --text-dark: #0f172a;
+  --text-muted: #475569;
+  --border-light: #e2e8f0;
+  --border-strong: #0f172a;
+  --btn-primary: #0f172a;
+  --btn-hover: #1e293b;
 
-  /* Strict Error State (Only functional color allowed) */
   --error-color: #b71c1c;
   --error-bg: #fff5f5;
   --error-border: #dc2626;
 
-  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  --border-radius: 4px;
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --border-radius: 6px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* 2. Reset & Accessibility Baseline */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -47,10 +40,9 @@ body {
   flex-direction: column;
 }
 
-/* Keyboard Navigation Skip Link */
 .skip-nav-link {
   position: absolute;
-  top: -50px;
+  top: -60px;
   left: var(--space-16);
   background: var(--text-dark);
   color: #ffffff;
@@ -59,6 +51,7 @@ body {
   text-decoration: none;
   font-weight: 600;
   border-radius: var(--border-radius);
+  transition: top 0.2s ease;
 }
 
 .skip-nav-link:focus {
@@ -66,13 +59,11 @@ body {
   outline: 3px solid var(--text-dark);
 }
 
-/* Accessible Focus States (Lighthouse Requirement) */
 :focus-visible {
   outline: 2px solid var(--text-dark);
   outline-offset: 2px;
 }
 
-/* 3. Site Header */
 .site-header {
   background-color: var(--bg-card);
   border-bottom: 1px solid var(--border-light);
@@ -96,7 +87,7 @@ body {
 }
 
 .sub-heading {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
 }
 
@@ -119,7 +110,6 @@ body {
   border-radius: 50%;
 }
 
-/* 4. App Container & Layout */
 .app-container {
   max-width: 1200px;
   width: 100%;
@@ -131,12 +121,12 @@ body {
   gap: var(--space-32);
 }
 
-/* 5. Controls Panel (Search & Filters) */
 .controls-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--border-radius);
   padding: var(--space-24);
+  box-shadow: var(--shadow-sm);
 }
 
 .control-row {
@@ -158,11 +148,12 @@ body {
 
 .label-text {
   display: block;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-8);
+  color: var(--text-muted);
 }
 
 .input-control,
@@ -173,8 +164,14 @@ body {
   font-family: inherit;
   color: var(--text-dark);
   background-color: var(--bg-card);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border-light);
   border-radius: var(--border-radius);
+  transition: border-color 0.2s ease;
+}
+
+.input-control:hover,
+.select-control:hover {
+  border-color: var(--text-muted);
 }
 
 .network-toggle-item {
@@ -199,7 +196,6 @@ body {
   accent-color: var(--text-dark);
 }
 
-/* 6. Buttons System */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -211,7 +207,7 @@ body {
   cursor: pointer;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background-color 0.15s ease-in-out;
+  transition: all 0.2s ease;
 }
 
 .btn-primary {
@@ -221,6 +217,7 @@ body {
 
 .btn-primary:hover {
   background-color: var(--btn-hover);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -233,7 +230,6 @@ body {
   background-color: var(--bg-main);
 }
 
-/* 7. Catalog Section & Furniture Cards Grid */
 .catalog-header {
   display: flex;
   justify-content: space-between;
@@ -256,7 +252,7 @@ body {
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--space-24);
 }
 
@@ -264,41 +260,70 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--border-radius);
-  padding: var(--space-24);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-16);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
   border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
-.card-top {
+.card-img-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-color: #f1f5f9;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.04);
+}
+
+.card-badge {
+  position: absolute;
+  top: var(--space-8);
+  right: var(--space-8);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  background: var(--bg-card);
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+}
+
+.card-body {
+  padding: var(--space-24);
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-8);
+  flex-direction: column;
+  gap: var(--space-16);
+  flex: 1;
 }
 
 .card-title {
   font-size: 1.125rem;
   font-weight: 700;
-}
-
-.card-badge {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--border-radius);
+  line-height: 1.3;
 }
 
 .card-specs {
   list-style: none;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -319,12 +344,27 @@ body {
   font-weight: 600;
 }
 
+.card-footer {
+  padding: var(--space-16) var(--space-24);
+  background-color: var(--bg-main);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+}
+
 .card-price {
   font-size: 1.25rem;
   font-weight: 700;
 }
 
-/* 8. Unhappy Path: Empty State (No Data Found) */
 .empty-state-box {
   background-color: var(--bg-card);
   border: 1px dashed var(--border-strong);
@@ -344,7 +384,6 @@ body {
   margin-bottom: var(--space-24);
 }
 
-/* 9. Unhappy Path: Slow 3G Loading Spinner */
 .loading-state {
   display: flex;
   flex-direction: column;
@@ -370,12 +409,12 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* 10. Form & Validation Error States (Unhappy Path: Invalid Inputs) */
 .intake-section {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--border-radius);
   padding: var(--space-32);
+  box-shadow: var(--shadow-sm);
 }
 
 .form-title {
@@ -411,7 +450,6 @@ body {
   justify-content: flex-end;
 }
 
-/* TRD Requirement: Offending fields highlighted in RED */
 .input-error {
   border-color: var(--error-border) !important;
   background-color: var(--error-bg) !important;
@@ -426,7 +464,6 @@ body {
   min-height: 18px;
 }
 
-/* 11. Footer */
 .site-footer {
   background-color: var(--bg-card);
   border-top: 1px solid var(--border-light);
@@ -445,7 +482,6 @@ body {
   gap: var(--space-8);
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
   .site-header {
     padding: var(--space-16);
