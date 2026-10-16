@@ -93,8 +93,24 @@
   const resultsCount = document.getElementById("results-count");
   const networkStatusText = document.getElementById("network-status-text");
   const furnitureForm = document.getElementById("furniture-form");
+  const fileInput = document.getElementById("item-file");
 
   let delayTimer = null;
+  let currentUploadedPhoto = "";
+
+  if (fileInput) {
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          currentUploadedPhoto = e.target.result;
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        currentUploadedPhoto = "";
+      }
+    });
+  }
 
   function renderCatalog() {
     loadingSpinner.hidden = true;
@@ -136,7 +152,8 @@
         const safeStatus = sanitizeText(item.status);
         const safeDims = sanitizeText(item.dimensions);
         const formattedPrice = Number(item.price).toLocaleString("en-US");
-        const itemImg = item.image || "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
+        const defaultFallback = "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
+        const itemImg = item.image || defaultFallback;
 
         return `
         <article class="card">
@@ -314,8 +331,6 @@
       return;
     }
 
-    const imageEl = document.getElementById("item-image");
-    const customImage = imageEl && imageEl.value.trim() ? sanitizeText(imageEl.value.trim()) : "";
     const defaultImage = "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
 
     const newItem = {
@@ -326,11 +341,12 @@
       joinery: sanitizeText(joineryEl.value.trim()),
       status: sanitizeText(statusEl.value),
       dimensions: sanitizeText(dimsEl.value.trim()),
-      image: customImage || defaultImage
+      image: currentUploadedPhoto || defaultImage
     };
 
     catalog.unshift(newItem);
     furnitureForm.reset();
+    currentUploadedPhoto = "";
     applyFilters("New Workshop Piece Added Successfully", newItem.title);
   });
 
