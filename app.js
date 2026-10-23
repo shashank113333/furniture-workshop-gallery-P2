@@ -6,13 +6,11 @@
       skip: "Skip to Gallery Content",
       heading: "Workshop Gallery",
       subheading: "Handcrafted Furniture • Internal Floor Staff System",
-      netOnline: "Network: Online",
-      netSlow: "Network: Slow 3G (Simulated)",
+      netOnline: "Network: Operational",
       searchLabel: "Search Inventory",
       searchPlaceholder: "Search by name, wood type, or joinery...",
       woodLabel: "Wood Species",
       statusLabel: "Availability",
-      slow3g: "Simulate Slow 3G",
       sync: "Synchronizing workshop records...",
       catalogTitle: "Current Workshop Pieces",
       emptyTitle: "No data found",
@@ -60,13 +58,11 @@
       skip: "गैलरी सामग्री पर जाएँ",
       heading: "वर्कशॉप गैलरी",
       subheading: "हस्तशिल्प फर्नीचर • इंटरनल फ्लोर स्टाफ सिस्टम",
-      netOnline: "नेटवर्क: ऑनलाइन",
-      netSlow: "नेटवर्क: धीमा 3G (सिमुलेटेड)",
+      netOnline: "नेटवर्क: चालू (Operational)",
       searchLabel: "इन्वेंटरी खोजें",
       searchPlaceholder: "नाम, लकड़ी का प्रकार या कारीगरी से खोजें...",
       woodLabel: "लकड़ी की प्रजाति",
       statusLabel: "उपलब्धता",
-      slow3g: "धीमा 3G नेटवर्क सिमुलेट करें",
       sync: "वर्कशॉप रिकॉर्ड्स लोड हो रहे हैं...",
       catalogTitle: "वर्तमान वर्कशॉप फर्नीचर",
       emptyTitle: "कोई डेटा नहीं मिला",
@@ -89,9 +85,9 @@
       allSpecies: "सभी प्रजातियाँ",
       allStatuses: "सभी स्थितियाँ",
       selectSpecies: "प्रजाति चुनें...",
-      statusAvail: "उपलब्ध (Available)",
-      statusProg: "प्रगति पर (In Progress)",
-      statusRes: "आरक्षित (Reserved)",
+      statusAvail: "उपलब्ध",
+      statusProg: "प्रगति पर",
+      statusRes: "आरक्षित",
       woodTeak: "सागौन (Teak)",
       woodWalnut: "अखरोट (Walnut)",
       woodOak: "ओक (Oak)",
@@ -222,7 +218,6 @@
   const searchInput = document.getElementById("search-input");
   const woodFilter = document.getElementById("wood-filter");
   const statusFilter = document.getElementById("status-filter");
-  const slow3gToggle = document.getElementById("slow-3g-toggle");
   const loadingSpinner = document.getElementById("loading-spinner");
   const cardsGrid = document.getElementById("cards-grid");
   const emptyStateView = document.getElementById("empty-state-view");
@@ -273,13 +268,12 @@
     document.getElementById("skip-link-text").textContent = t.skip;
     document.getElementById("ui-main-heading").textContent = t.heading;
     document.getElementById("ui-sub-heading").innerHTML = t.subheading;
-    networkStatusText.textContent = slow3gToggle.checked ? t.netSlow : t.netOnline;
+    networkStatusText.textContent = t.netOnline;
 
     document.getElementById("ui-search-label").textContent = t.searchLabel;
     searchInput.placeholder = t.searchPlaceholder;
     document.getElementById("ui-wood-label").textContent = t.woodLabel;
     document.getElementById("ui-status-label").textContent = t.statusLabel;
-    document.getElementById("ui-slow3g-label").textContent = t.slow3g;
     document.getElementById("ui-loading-text").textContent = t.sync;
 
     woodFilter.options[0].text = t.allSpecies;
@@ -431,21 +425,16 @@
   }
 
   function applyFilters(actionName, detail) {
-    if (slow3gToggle.checked) {
-      loadingSpinner.hidden = false;
-      cardsGrid.hidden = true;
-      emptyStateView.hidden = true;
+    loadingSpinner.hidden = false;
+    cardsGrid.hidden = true;
+    emptyStateView.hidden = true;
 
-      if (delayTimer) clearTimeout(delayTimer);
+    if (delayTimer) clearTimeout(delayTimer);
 
-      delayTimer = setTimeout(function () {
-        renderCatalog();
-        logTelemetry(actionName, detail);
-      }, 500);
-    } else {
+    delayTimer = setTimeout(function () {
       renderCatalog();
       logTelemetry(actionName, detail);
-    }
+    }, 350);
   }
 
   langToggleBtn.addEventListener("click", function () {
@@ -473,17 +462,6 @@
 
   statusFilter.addEventListener("change", function () {
     applyFilters("Filter Changed", `Status: ${statusFilter.value}`);
-  });
-
-  slow3gToggle.addEventListener("change", function () {
-    const t = DICT[currentLang];
-    if (slow3gToggle.checked) {
-      networkStatusText.textContent = t.netSlow;
-      logTelemetry("Slow 3G Latency Simulation Enabled");
-    } else {
-      networkStatusText.textContent = t.netOnline;
-      logTelemetry("Slow 3G Latency Simulation Disabled");
-    }
   });
 
   resetFiltersBtn.addEventListener("click", function () {
