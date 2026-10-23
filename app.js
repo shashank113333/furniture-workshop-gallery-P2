@@ -10,7 +10,7 @@
       searchPlaceholder: "Search by name, wood type, or joinery...",
       woodLabel: "Wood Species",
       statusLabel: "Availability",
-      sync: "Synchronizing workshop records...",
+      sync: "Synchronizing workshop records on slow network...",
       catalogTitle: "Current Workshop Pieces",
       emptyTitle: "No data found",
       emptyDesc: "No handcrafted pieces match your search or filter criteria.",
@@ -61,7 +61,7 @@
       searchPlaceholder: "नाम, लकड़ी का प्रकार या कारीगरी से खोजें...",
       woodLabel: "लकड़ी की प्रजाति",
       statusLabel: "उपलब्धता",
-      sync: "वर्कशॉप रिकॉर्ड्स लोड हो रहे हैं...",
+      sync: "धीमे नेटवर्क पर रिकॉर्ड्स लोड हो रहे हैं...",
       catalogTitle: "वर्तमान वर्कशॉप फर्नीचर",
       emptyTitle: "कोई डेटा नहीं मिला",
       emptyDesc: "आपकी खोज या फ़िल्टर से मेल खाता कोई फर्नीचर नहीं मिला।",
@@ -148,6 +148,16 @@
       .replace(/\//g, "&#x2F;");
   }
 
+  function isSlowConnection() {
+    if (navigator.connection) {
+      const type = navigator.connection.effectiveType;
+      if (type === "slow-2g" || type === "2g" || type === "3g") {
+        return true;
+      }
+    }
+    return false;
+  }
+
   const initialItems = [
     {
       id: "FW-1",
@@ -228,6 +238,14 @@
 
   let delayTimer = null;
   let currentUploadedPhoto = "";
+
+  if (searchInput) {
+    searchInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    });
+  }
 
   if (fileInput) {
     fileInput.addEventListener("change", function () {
@@ -421,16 +439,18 @@
   }
 
   function applyFilters(actionName, detail) {
-    loadingSpinner.hidden = false;
-    cardsGrid.hidden = true;
-    emptyStateView.hidden = true;
-
     if (delayTimer) clearTimeout(delayTimer);
 
-    delayTimer = setTimeout(function () {
+    if (isSlowConnection()) {
+      loadingSpinner.hidden = false;
+      delayTimer = setTimeout(function () {
+        renderCatalog();
+        logTelemetry(actionName, `${detail} [Slow 3G Connection Handled]`);
+      }, 800);
+    } else {
       renderCatalog();
       logTelemetry(actionName, detail);
-    }, 350);
+    }
   }
 
   langToggleBtn.addEventListener("click", function () {
