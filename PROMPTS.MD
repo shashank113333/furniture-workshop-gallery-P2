@@ -1,9 +1,11 @@
-# Prompts Log - ENG-15994
-**Module:** Handcrafted Furniture Workshop Gallery  
-**Assignee:** Shashank Vishwakarma [PDIT-FTE-11454]  
-
-### Prompts:
-1. Semantic HTML5 layout and monochromatic corporate CSS grid using an 8px/16px/32px spacing scale.
-2. Real-time search and filter logic in pure vanilla JS with keyboard accessibility.
-3. Edge cases handling: "No data found" empty state and slow 3G simulation with a loading spinner.
-4. Form input validation with red border highlighting, XSS sanitization, and console analytics logging.
+# AI Prompts Documentation (PROMPTS.md)
+**Employee ID**: PDIT-FTE-11454  
+**Project**: Handcrafted Furniture Workshop Gallery (Ticket ID: ENG-15994)  
+---
+### Concept & Architectural Queries:
+1. *Query*: "What are the modern CSS Grid techniques to maintain fixed monochromatic contrast ratios adhering to WCAG 2.1 AA standards without external libraries?"
+   - *Outcome*: Designed a custom corporate 16px/32px spacing scale with pure semantic tokens.
+2. *Query*: "How does the Network Information API (`navigator.connection.effectiveType`) handle slow 3G detection in Chrome DevTools throttling?"
+   - *Outcome*: Implemented automatic simulated network throttling spinner detection for bad connectivity states.
+3. *Query*: "Best practices for client-side XSS prevention when rendering dynamically injected DOM elements without innerHTML risks."
+   - *Outcome*: Applied strict string sanitization and DOM element property assignments (`textContent`, `setAttribute`).

@@ -1,8 +1,15 @@
-Handcrafted Furniture Workshop Gallery - Deliverable Links
-Ticket: ENG-15994
-Assignee: Shashank Vishwakarma [PDIT-FTE-11454]
+==================================================
+HANDCRAFTED FURNITURE WORKSHOP GALLERY
+Employee Name: Shashank Vishwakarma
+Employee ID: PDIT-FTE-11454
+Ticket ID: ENG-15994 | Client Project 4
+==================================================
 
-GitHub Repository URL:
+1. GitHub Repository URL:
 https://github.com/shashank113333/furniture-workshop-gallery-P2
-Live Deployment Link (Vercel):
+
+2. Live Deployment URL (Vercel):
 https://furniture-workshop-gallery.vercel.app/
+
+3. Video Walkthrough URL (Loom / Google Drive):
+[यहाँ अपने वीडियो का लिंक पेस्ट करें - Drive लिंक हो तो Anyone with link can view पर सेट करें]

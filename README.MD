@@ -1,47 +1,25 @@
 # Handcrafted Furniture Workshop Gallery
-
-**Ticket ID:** ENG-15994  
-**Epic:** Core Infrastructure Overhaul  
-**Priority:** P1 (High)  
-**Story Points:** 5  
-**Assignee:** Shashank Vishwakarma [PDIT-FTE-11454]  
-**Reporter / Module Lead:** Amit Sharma  
+**Ticket ID**: ENG-15994 | **Sprint / Deliverable**: Client Project 4  
+**Engineer**: Shashank Vishwakarma (Employee ID: PDIT-FTE-11454)  
+**Organization**: Prodesk IT  
 
 ---
 
 ## 1. Project Overview
-The Handcrafted Furniture Workshop Gallery is a lightweight, accessible digital inventory management tool built for floor staff. It eliminates reliance on manual paper records and spreadsheets, preventing data loss and speeding up floor operations.
+A high-performance, single-page workshop inventory gallery built with pure semantic HTML5, vanilla CSS, and vanilla JavaScript (zero external dependencies or frameworks). Engineered to replace manual paper sheets and Excel logs for furniture workshop floor staff.
 
----
+## 2. Key Features
+- **Happy Path Execution**: Instant real-time search across timber species, furniture type, and dimensions with zero page reload.
+- **Bilingual Engine**: Complete localized switching between English and Hindi (`हिन्दी`) for all UI labels, timber names, joinery terms, and status badges.
+- **Dual Currency Engine**: Real-time price conversion between `$ USD` and `₹ INR` with Indian numbering formatting (`en-IN`).
+- **Device Photo Upload**: Intake form supports local device gallery uploads (`FileReader.readAsDataURL()`) with persistent image rendering.
+- **Unhappy Path & Edge Cases**:
+  - *Empty Search State*: Displays clear "No data found" alert with an instant reset button.
+  - *Network Throttling*: Auto-detects Slow 3G network connectivity via DevTools and displays an active loading spinner.
+  - *Input Validation*: Real-time form validation highlighting invalid fields with red borders and error messages.
+- **Enterprise Standards**: 100% Lighthouse Accessibility (a11y), input XSS sanitization, and real-time telemetry console logging.
 
-## 2. Technical Stack & Architectural Constraints
-- **HTML:** Pure Semantic HTML5 (`<header>`, `<main>`, `<section>`, `<article>`, `<footer>`). Zero external frameworks (No React).
-- **CSS:** Vanilla CSS adhering to a monochromatic corporate design system and a 16px/32px spacing scale. Zero external CSS libraries (No Tailwind, No Bootstrap).
-- **JavaScript:** Pure Vanilla JavaScript (`"use strict"` mode) with zero runtime dependencies.
-
----
-
-## 3. Requirements Traceability
-
-### 3.1 Happy Path
-- **Instant Search & Multi-Filter:** Real-time search across piece titles, wood species, and joinery methods.
-- **Stock Tracking:** Automatic calculation of catalog totals and filtered results count.
-- **Piece Logging:** Floor staff can input and immediately commit new furniture pieces to memory state.
-
-### 3.2 Unhappy Path (Edge Cases)
-- **Empty States:** When no catalog records match a search query or filter, an accessible "No data found" container displays with a "Reset Filters" action.
-- **Bad Connectivity (Slow 3G Simulation):** An integrated network latency simulator renders an animated visual spinner during async catalog queries.
-- **Invalid Inputs:** Submitting incomplete or malformed piece forms halts submission, highlights offending fields in red (`.input-error`), and surfaces targeted validation messages.
-
-### 3.3 Non-Functional Requirements (NFRs)
-- **Accessibility (a11y):** Keyboard navigable skip link, explicit form labels, ARIA landmarks, and high-contrast styling targeting a 100% Lighthouse Accessibility score.
-- **Telemetry Simulation:** Standardized logging to developer console:
-  `[Analytics] User interacted with Handcrafted Furniture Workshop Gallery - <Action>`
-- **Security:** In-memory XSS sanitization routine strips script injections and special characters prior to catalog insertion.
-
----
-
-## 4. Local Execution
-1. Clone or extract the repository.
-2. Open `index.html` in any modern web browser (Google Chrome, Microsoft Edge, Safari).
-3. Open Developer Tools (`F12`) to verify console analytics logging and run a Lighthouse audit.
+## 3. Setup & Running Instructions
+1. Clone or extract the project folder:
+   ```bash
+   git clone https://github.com/shashank113333/furniture-workshop-gallery-P2.git
