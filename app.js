@@ -6,7 +6,6 @@
       skip: "Skip to Gallery Content",
       heading: "Workshop Gallery",
       subheading: "Handcrafted Furniture • Internal Floor Staff System",
-      netOnline: "Network: Operational",
       searchLabel: "Search Inventory",
       searchPlaceholder: "Search by name, wood type, or joinery...",
       woodLabel: "Wood Species",
@@ -58,7 +57,6 @@
       skip: "गैलरी सामग्री पर जाएँ",
       heading: "वर्कशॉप गैलरी",
       subheading: "हस्तशिल्प फर्नीचर • इंटरनल फ्लोर स्टाफ सिस्टम",
-      netOnline: "नेटवर्क: चालू (Operational)",
       searchLabel: "इन्वेंटरी खोजें",
       searchPlaceholder: "नाम, लकड़ी का प्रकार या कारीगरी से खोजें...",
       woodLabel: "लकड़ी की प्रजाति",
@@ -223,7 +221,6 @@
   const emptyStateView = document.getElementById("empty-state-view");
   const resetFiltersBtn = document.getElementById("reset-filters-btn");
   const resultsCount = document.getElementById("results-count");
-  const networkStatusText = document.getElementById("network-status-text");
   const furnitureForm = document.getElementById("furniture-form");
   const fileInput = document.getElementById("item-file");
   const langToggleBtn = document.getElementById("lang-toggle-btn");
@@ -268,7 +265,6 @@
     document.getElementById("skip-link-text").textContent = t.skip;
     document.getElementById("ui-main-heading").textContent = t.heading;
     document.getElementById("ui-sub-heading").innerHTML = t.subheading;
-    networkStatusText.textContent = t.netOnline;
 
     document.getElementById("ui-search-label").textContent = t.searchLabel;
     searchInput.placeholder = t.searchPlaceholder;
