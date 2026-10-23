@@ -12,4 +12,4 @@ https://github.com/shashank113333/furniture-workshop-gallery-P2
 https://furniture-workshop-gallery.vercel.app/
 
 3. Video Walkthrough URL (Loom / Google Drive):
-[यहाँ अपने वीडियो का लिंक पेस्ट करें - Drive लिंक हो तो Anyone with link can view पर सेट करें]
+https://drive.google.com/file/d/1Ll-Oe2W5FALyKIim45SnrNKa8BifjQJG/view?usp=drivesdk
