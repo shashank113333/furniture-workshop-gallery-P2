@@ -112,6 +112,28 @@
     }
   };
 
+  const TRANSLATED_DATA = {
+    "Solid Teak Dining Table": "सागौन की डाइनिंग टेबल",
+    "Walnut Low-Back Lounge Chair": "अखरोट की लाउंज कुर्सी",
+    "Quarter-Sawn White Oak Credenza": "व्हाइट ओक क्रेडेंज़ा (साइडबोर्ड)",
+    "Ash Floating Drafting Desk": "ऐश वुड ड्राफ्टिंग डेस्क",
+    "Live Edge Walnut Bench": "लाइव एज अखरोट की बेंच",
+    "Scandinavian Oak Bookshelf": "स्कैंडिनेवियन ओक बुकशेल्फ़",
+    "Teak": "सागौन",
+    "Walnut": "अखरोट",
+    "Oak": "ओक",
+    "Ash": "ऐश",
+    "Mortise and Tenon": "मोर्टिज़ और टेनॉन जोड़",
+    "Bridle Joinery": "ब्राइडल जोड़",
+    "Half-Blind Dovetails": "हाफ-ब्लाइंड डवटेल जोड़",
+    "Through-Tenon Splines": "थ्रू-टेनॉन स्प्लाइन्स जोड़",
+    "Butterfly Key Inlays": "बटरफ्लाई की (तितली जोड़)",
+    "Sliding Housing": "स्लाइडिंग हाउसिंग जोड़",
+    "Available": "उपलब्ध",
+    "In Progress": "प्रगति पर",
+    "Reserved": "आरक्षित"
+  };
+
   let currentLang = "en";
   let currentCurrency = "USD";
   const USD_TO_INR = 83;
@@ -237,6 +259,13 @@
     return `$${Number(usdPrice).toLocaleString("en-US")}`;
   }
 
+  function getDisplayValue(key) {
+    if (currentLang === "hi" && TRANSLATED_DATA[key]) {
+      return TRANSLATED_DATA[key];
+    }
+    return key;
+  }
+
   function applyLanguage(lang) {
     currentLang = lang;
     const t = DICT[lang];
@@ -314,11 +343,21 @@
     const status = statusFilter.value;
 
     const filtered = catalog.filter(function (item) {
+      const titleEn = item.title.toLowerCase();
+      const titleHi = (TRANSLATED_DATA[item.title] || "").toLowerCase();
+      const woodEn = item.wood.toLowerCase();
+      const woodHi = (TRANSLATED_DATA[item.wood] || "").toLowerCase();
+      const joineryEn = item.joinery.toLowerCase();
+      const joineryHi = (TRANSLATED_DATA[item.joinery] || "").toLowerCase();
+
       const matchQuery =
         !query ||
-        item.title.toLowerCase().includes(query) ||
-        item.wood.toLowerCase().includes(query) ||
-        item.joinery.toLowerCase().includes(query);
+        titleEn.includes(query) ||
+        titleHi.includes(query) ||
+        woodEn.includes(query) ||
+        woodHi.includes(query) ||
+        joineryEn.includes(query) ||
+        joineryHi.includes(query);
 
       const matchWood = wood === "ALL" || item.wood === wood;
       const matchStatus = status === "ALL" || item.status === status;
@@ -340,10 +379,14 @@
 
     cardsGrid.innerHTML = filtered
       .map(function (item) {
-        const safeTitle = sanitizeText(item.title);
-        const safeWood = sanitizeText(item.wood);
-        const safeJoinery = sanitizeText(item.joinery);
-        const safeStatus = sanitizeText(item.status);
+        const rawTitle = getDisplayValue(item.title);
+        const safeTitle = sanitizeText(rawTitle);
+        const rawWood = getDisplayValue(item.wood);
+        const safeWood = sanitizeText(rawWood);
+        const rawJoinery = getDisplayValue(item.joinery);
+        const safeJoinery = sanitizeText(rawJoinery);
+        const rawStatus = getDisplayValue(item.status);
+        const safeStatus = sanitizeText(rawStatus);
         const safeDims = sanitizeText(item.dimensions);
         const priceDisplay = formatPriceDisplay(item.price);
         const defaultFallback = "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80";
