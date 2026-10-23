@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a href="#gallery-section" class="skip-nav-link">Skip to Gallery Content</a>
+  <a href="#gallery-section" class="skip-nav-link" id="skip-link-text">Skip to Gallery Content</a>
 
   <header class="site-header" role="banner">
     <div class="header-inner">
       <div class="header-title-box">
-        <h1 class="main-heading">Workshop Gallery</h1>
-        <p class="sub-heading">Handcrafted Furniture &bull; Internal Floor Staff System</p>
+        <h1 class="main-heading" id="ui-main-heading">Workshop Gallery</h1>
+        <p class="sub-heading" id="ui-sub-heading">Handcrafted Furniture &bull; Internal Floor Staff System</p>
       </div>
       <div class="header-status" aria-label="System status">
         <span class="status-indicator"></span>
@@ -28,7 +28,7 @@
     <section class="controls-card" aria-label="Search and Filter Controls">
       <div class="control-row">
         <div class="control-item search-box">
-          <label for="search-input" class="label-text">Search Inventory</label>
+          <label for="search-input" class="label-text" id="ui-search-label">Search Inventory</label>
           <input 
             type="search" 
             id="search-input" 
@@ -39,7 +39,7 @@
         </div>
 
         <div class="control-item">
-          <label for="wood-filter" class="label-text">Wood Species</label>
+          <label for="wood-filter" class="label-text" id="ui-wood-label">Wood Species</label>
           <select id="wood-filter" class="select-control">
             <option value="ALL">All Species</option>
             <option value="Teak">Teak</option>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="control-item">
-          <label for="status-filter" class="label-text">Availability</label>
+          <label for="status-filter" class="label-text" id="ui-status-label">Availability</label>
           <select id="status-filter" class="select-control">
             <option value="ALL">All Statuses</option>
             <option value="Available">Available</option>
@@ -62,7 +62,7 @@
         <div class="control-item network-toggle-item">
           <label for="slow-3g-toggle" class="checkbox-label">
             <input type="checkbox" id="slow-3g-toggle" class="checkbox-control">
-            <span>Simulate Slow 3G</span>
+            <span id="ui-slow3g-label">Simulate Slow 3G</span>
           </label>
         </div>
       </div>
@@ -70,12 +70,12 @@
 
     <div id="loading-spinner" class="loading-state" role="status" aria-live="polite" hidden>
       <div class="spinner-circle" aria-hidden="true"></div>
-      <p>Synchronizing workshop records...</p>
+      <p id="ui-loading-text">Synchronizing workshop records...</p>
     </div>
 
     <section id="gallery-section" class="catalog-section" aria-label="Furniture Catalog List">
       <div class="catalog-header">
-        <h2 class="section-title">Current Workshop Pieces</h2>
+        <h2 class="section-title" id="ui-catalog-title">Current Workshop Pieces</h2>
         <span id="results-count" class="count-badge">8 items</span>
       </div>
 
@@ -83,28 +83,28 @@
       </div>
 
       <div id="empty-state-view" class="empty-state-box" role="status" aria-live="polite" hidden>
-        <h3 class="empty-title">No data found</h3>
-        <p class="empty-msg">No handcrafted pieces match your search or filter criteria.</p>
+        <h3 class="empty-title" id="ui-empty-title">No data found</h3>
+        <p class="empty-msg" id="ui-empty-desc">No handcrafted pieces match your search or filter criteria.</p>
         <button type="button" id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
       </div>
     </section>
 
     <section class="intake-section" aria-label="Add New Furniture Piece">
       <div class="form-container">
-        <h2 class="form-title">Log New Workshop Piece</h2>
-        <p class="form-subtext">Fields marked with an asterisk (<span class="required">*</span>) are mandatory.</p>
+        <h2 class="form-title" id="ui-form-title">Log New Workshop Piece</h2>
+        <p class="form-subtext" id="ui-form-subtext">Fields marked with an asterisk (<span class="required">*</span>) are mandatory.</p>
         
         <form id="furniture-form" novalidate>
           <div class="form-grid">
             
             <div class="form-group">
-              <label for="item-title" class="label-text">Piece Title <span class="required">*</span></label>
+              <label for="item-title" class="label-text" id="ui-label-title">Piece Title <span class="required">*</span></label>
               <input type="text" id="item-title" name="title" class="input-control" placeholder="e.g. Dining Table No. 4" required>
               <span id="title-error" class="error-text" aria-live="polite"></span>
             </div>
 
             <div class="form-group">
-              <label for="item-wood" class="label-text">Wood Species <span class="required">*</span></label>
+              <label for="item-wood" class="label-text" id="ui-label-wood">Wood Species <span class="required">*</span></label>
               <select id="item-wood" name="wood" class="select-control" required>
                 <option value="">Select Species...</option>
                 <option value="Teak">Teak</option>
@@ -116,19 +116,19 @@
             </div>
 
             <div class="form-group">
-              <label for="item-price" class="label-text">Price (USD) <span class="required">*</span></label>
+              <label for="item-price" class="label-text" id="ui-label-price">Base Price <span class="required">*</span></label>
               <input type="number" id="item-price" name="price" class="input-control" placeholder="e.g. 1850" min="1" required>
               <span id="price-error" class="error-text" aria-live="polite"></span>
             </div>
 
             <div class="form-group">
-              <label for="item-joinery" class="label-text">Joinery Method <span class="required">*</span></label>
+              <label for="item-joinery" class="label-text" id="ui-label-joinery">Joinery Method <span class="required">*</span></label>
               <input type="text" id="item-joinery" name="joinery" class="input-control" placeholder="e.g. Mortise and Tenon" required>
               <span id="joinery-error" class="error-text" aria-live="polite"></span>
             </div>
 
             <div class="form-group">
-              <label for="item-status" class="label-text">Floor Status <span class="required">*</span></label>
+              <label for="item-status" class="label-text" id="ui-label-status">Floor Status <span class="required">*</span></label>
               <select id="item-status" name="status" class="select-control" required>
                 <option value="Available">Available</option>
                 <option value="In Progress">In Progress</option>
@@ -138,13 +138,13 @@
             </div>
 
             <div class="form-group">
-              <label for="item-dimensions" class="label-text">Dimensions <span class="required">*</span></label>
+              <label for="item-dimensions" class="label-text" id="ui-label-dimensions">Dimensions <span class="required">*</span></label>
               <input type="text" id="item-dimensions" name="dimensions" class="input-control" placeholder="e.g. 72L x 36W x 30H" required>
               <span id="dimensions-error" class="error-text" aria-live="polite"></span>
             </div>
 
             <div class="form-group">
-              <label for="item-file" class="label-text">Upload Photo from Gallery (Optional)</label>
+              <label for="item-file" class="label-text" id="ui-label-photo">Upload Photo from Gallery (Optional)</label>
               <input type="file" id="item-file" name="photo" accept="image/*" class="input-control">
               <span id="file-error" class="error-text" aria-live="polite"></span>
             </div>
@@ -164,23 +164,28 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-col">
-          <h3 class="footer-brand">Atelier Heritage Woodworks</h3>
-          <p class="footer-about">Internal floor staff management and artisan joinery catalog system. Engineered for high-reliability warehouse and workshop environments.</p>
+          <h3 class="footer-brand" id="ui-footer-brand">Atelier Heritage Woodworks</h3>
+          <p class="footer-about" id="ui-footer-about">Internal floor staff management and artisan joinery catalog system. Engineered for high-reliability warehouse and workshop environments.</p>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Floor Operations</h4>
+          <h4 class="footer-title" id="ui-footer-title">Floor Operations</h4>
           <ul class="footer-nav">
-            <li>Timber Inventory Tracking</li>
-            <li>Joinery Specification Index</li>
-            <li>Custom Commission Dispatch</li>
+            <li id="ui-foot-item1">Timber Inventory Tracking</li>
+            <li id="ui-foot-item2">Joinery Specification Index</li>
+            <li id="ui-foot-item3">Custom Commission Dispatch</li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; Atelier Heritage Woodworks. All rights reserved. Internal operational interface.</p>
+        <p id="ui-footer-copyright">&copy; Atelier Heritage Woodworks. All rights reserved. Internal operational interface.</p>
       </div>
     </div>
   </footer>
+
+  <div class="utility-dock" aria-label="Language and Currency Preferences">
+    <button type="button" id="lang-toggle-btn" class="dock-btn" aria-label="Toggle language">हिंदी</button>
+    <button type="button" id="currency-toggle-btn" class="dock-btn" aria-label="Toggle currency">₹ INR</button>
+  </div>
 
   <script src="app.js"></script>
 </body>
